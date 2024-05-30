@@ -9,9 +9,7 @@ function createOrder(orderId) {
                 console.log(err.message)
             })
         }
-        resolve(function () {
-            return orderId
-        })
+        resolve(orderId)
     })
     return p
 }
@@ -19,25 +17,17 @@ function createOrder(orderId) {
 function proceedToPayment(orderId) {
     let p = new Promise(function (resolve, reject) {
         if (orderId == 1) {
-            resolve(function () {
-                return 1
-            })
+            resolve(1)
         }
         else if (orderId == 2) {
-            resolve(function () {
-                return 2
-            })
+            resolve(2)
         }
         else if (orderId == 3) {
-            resolve(function () {
-                return 3
-            })
+            resolve(3)
 
         }
         else if (orderId == 4) {
-            resolve(function () {
-                return 4
-            })
+            resolve(4)
         }
         else {
             reject(function () {
@@ -51,25 +41,17 @@ function proceedToPayment(orderId) {
 function showOrderSummary() {
     let p = new Promise(function (resolve, reject) {
         if (orderId == 1) {
-            resolve(function () {
-                return 1
-            })
+            resolve(1)
         }
         else if (orderId == 2) {
-            resolve(function () {
-                return 2
-            })
+            resolve(2)
         }
         else if (orderId == 3) {
-            resolve(function () {
-                return 3
-            })
+            resolve(3)
 
         }
         else if (orderId == 4) {
-            resolve(function () {
-                return 4
-            })
+            resolve(4)
         }
         else {
             reject(function () {
@@ -77,55 +59,32 @@ function showOrderSummary() {
             })
         }
     })
+    return p
 }
 
 function updateWallet(orderId) {
     let p = new Promise(function (resolve, reject) {
         if (orderId == 1) {
-            resolve(function () {
-                wallet.push('boxing gloves')
-            })
+            resolve(wallet.push('boxing gloves'))
         }
         else if (orderId == 2) {
-            resolve(function () {
-                wallet.push('golf')
-            })
+            resolve(wallet.push('golf'))
         }
         else if (orderId == 3) {
-            resolve(function () {
-                wallet.push('bat')
-            })
+            resolve(wallet.push('bat'))
 
         }
         else if (orderId == 4) {
-            resolve(function () {
-                wallet.push('ball')
-            })
+            resolve(wallet.push('ball'))
         }
         else {
-            reject(function () {
-                return "cannot be added to wallet"
-            })
+            reject("cannot be resolved")
         }
     })
     return p
 }
 
-let p1 = createOrder(orderId)
-    .then(function(){
-        return orderId
-    })
-    .then(function (orderId) {
-        return proceedToPayment(orderId)
-    })
-    .then(function (orderId) {
-        return showOrderSummary(orderId)
-    })
-    .then(function (orderId) {
-        return updateWallet(orderId)
-    })
-    .catch(function (err) {
-        console.log(err.message)
-    })
+createOrder(5)
+    .then(res => proceedToPayment(res).then(res => showOrderSummary(res).then(res => updateWallet(res))))
+    .catch(err => console.log(err))
 console.log(wallet)
-console.log(p1)
